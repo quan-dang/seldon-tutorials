@@ -1,0 +1,22 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: sklearn
+  namespace: models
+spec:
+  name: iris
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - name: classifier
+          image: yourdockerusername/demo-seldon:0.0.1
+        serviceAccountName: yourserviceaccount
+    graph:
+      children: []
+      endpoint:
+        type: REST
+      name: classifier
+      type: MODEL
+    name: default
+    replicas: 1
